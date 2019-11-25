@@ -1,6 +1,6 @@
 -- MySQL dump 10.16  Distrib 10.1.34-MariaDB, for debian-linux-gnu (x86_64)
 --
--- Host: localhost    Database: thingiverse
+-- Host: localhost    Database: thingiverse_catalog
 -- ------------------------------------------------------
 -- Server version	10.1.34-MariaDB-0ubuntu0.18.04.1
 
@@ -19,7 +19,7 @@
 -- Table structure for table `catalog`
 --
 
-DROP TABLE IF EXISTS `catalog`;
+DROP TABLE IF EXISTS `thingiverse_catalog`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `thingiverse_catalog` (
@@ -35,9 +35,9 @@ CREATE TABLE `thingiverse_catalog` (
 -- Dumping data for table `catalog`
 --
 
-LOCK TABLES `catalog` WRITE;
-/*!40000 ALTER TABLE `thingiver_catalog` DISABLE KEYS */;
-INSERT INTO `catalog` VALUES (0,0,'blank_page','0000-00-00 00:00:00');
+LOCK TABLES `thingiverse_catalog` WRITE;
+/*!40000 ALTER TABLE `thingiverse_catalog` DISABLE KEYS */;
+INSERT INTO `thingiverse_catalog` VALUES (0,0,'blank_page','0000-00-00 00:00:00');
 /*!40000 ALTER TABLE `thingiverse_catalog` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

@@ -1,6 +1,11 @@
+# Libraries
+
 import time
 import requests
 import mysql.connector
+
+# Runtime variables
+# TODO: Add config file to capture runtime variables
 
 http_success = 200
 html_title_limit = 150
@@ -8,6 +13,8 @@ worker_start_range = ''
 worker_end_range = 5000000
 empty_html_title = 'empty_page'
 download_directory = '/root/thingiverse_scrape/files/'
+
+# Function definitions
 
 def create_database_connection():
     db_connection = mysql.connector.connect(user='database_user', password='SuperSecretPassword', database='thingiverse')
@@ -46,12 +53,13 @@ def request_page(page_id):
     return url, response
 
 def take_a_nap():
-    # Used to ensure crawling is throttled with respect to crawl delay mentioned in robots.txt
+    # take_a_nap() is a crude mechanism used to throttle requests to ad-hoc adhere to robots.txt guidelines
     time.sleep(4)
 
 def check_download_directory():
     import os
     if not os.path.isdir(download_directory):
+        # TODO: Add prompt to create directory that doesn't exist
         import sys
         print('Download directory does not exist or is not valid. Exiting...')
         sys.exit()
@@ -61,8 +69,11 @@ def download_zip(current_page, url, html_title):
     take_a_nap()
     print('Downloading zip file for ' + url + '  ' + html_title)
     filepath = download_directory + '{}-{}.zip'.format(str(current_page), html_title)
+    # TODO: Add buffer friendly download option if possible / Exceptionally large files fail on download
     with open(filepath, 'wb') as zip_file:
         zip_file.write(zip_response.content)
+
+# Start Here
 
 if not worker_start_range:
     worker_start_range = retrieve_index() + 1
