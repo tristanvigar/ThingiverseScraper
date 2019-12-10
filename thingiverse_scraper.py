@@ -11,6 +11,7 @@ worker_end_range = 5000000
 empty_html_title = 'Empty_Page'
 download_directory = '/root/thingiverse_scrape/files/'
 sleep_timer_seconds = 4
+remote_zip_buffer_size = 100000000
 
 # Function definitions
 def create_database_connection():
@@ -67,7 +68,7 @@ def download_zip(current_page, url, html_title):
     with requests.get(url, stream=True) as remote_zip_file:
         remote_zip.raise_for_status()
         with open(filepath, 'wb') as local_zip_file:
-            for chunk in remote_zip.iter_content(chunk_size=8192)
+            for chunk in remote_zip.iter_content(chunk_size=remote_zip_buffer_size)
                 f.write(chunk)
 
 # Start Here
