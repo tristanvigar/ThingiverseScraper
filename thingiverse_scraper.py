@@ -101,6 +101,6 @@ for current_page in range(worker_start_range, worker_end_range):
     if empty_html_title not in html_title:
         print(download_zip(current_page, url, html_title))
 
-    database_insert_query = f'''INSERT INTO thingiverse_catalog VALUES (NULL, {current_page}, "{html_title}", CURRENT_TIMESTAMP, 0)'''
+    database_insert_query = f'''INSERT INTO thingiverse_catalog VALUES (NULL, {current_page}, "{html_title}", CURRENT_TIMESTAMP)'''
 
     submit_database_result(database_insert_query)
