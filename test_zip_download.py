@@ -7,9 +7,6 @@ buffer_size = 100000000
 
 with requests.get(download_link, stream=True) as remote_zip_file:
     remote_zip_file.raise_for_status()
-#        for i in remote_zip_file.iter_content(chunk_size=buffer_size):
-#            time.sleep(2)
-#            chunk_iters += 1
     with open(local_file, 'wb') as local_zip_file:
         chunk_iters = 0
         for chunk in remote_zip_file.iter_content(chunk_size=buffer_size):
@@ -17,4 +14,10 @@ with requests.get(download_link, stream=True) as remote_zip_file:
                 chunk_iters += 1
                 local_zip_file.write(chunk)
 
-print(chunk_iters)
+result = (
+          f'Test: {download_link}' + '\n' \
+          f'Downloaded in: {chunk_iters} chunks' + '\n'
+          f'Buffer Size: {buffer_size}' + '\n'
+         )
+
+print(result)
