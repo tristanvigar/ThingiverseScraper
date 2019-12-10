@@ -39,7 +39,7 @@ def close_database_connection(db_connection, db_cursor):
 
 def retrieve_index():
     db_connection, db_cursor = create_database_connection()
-    result = retrieve_database_result(db_connection, db_cursor, "SELECT page_num FROM catalog ORDER BY id DESC LIMIT 1")
+    result = retrieve_database_result(db_connection, db_cursor, "SELECT page_num FROM thingiverse_catalog ORDER BY id DESC LIMIT 1")
     result = int(result[0])
     close_database_connection(db_connection, db_cursor)
     return result
@@ -101,6 +101,6 @@ for current_page in range(worker_start_range, worker_end_range):
     if empty_html_title not in html_title:
         print(download_zip(current_page, url, html_title))
 
-    database_insert_query = f'''INSERT INTO catalog VALUES (NULL, {current_page}, "{html_title}", CURRENT_TIMESTAMP, 0)'''
+    database_insert_query = f'''INSERT INTO thingiverse_catalog VALUES (NULL, {current_page}, "{html_title}", CURRENT_TIMESTAMP, 0)'''
 
     submit_database_result(database_insert_query)
