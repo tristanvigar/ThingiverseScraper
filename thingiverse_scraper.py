@@ -63,13 +63,19 @@ def check_download_directory():
 def download_zip(current_page, url, html_title):
     # Pause for n seconds to avoid hammering Thingiverse
     time.sleep(sleep_timer_seconds)
-    filepath = download_directory + '{}-{}.zip'.format(str(current_page), html_title)
-    print('Downloading zip file for ' + url + '  ' + html_title)
+    local_filepath = f'{download_directory}{current_page}-{html_title}.zip'
+    chunk_interations = 0
     with requests.get(url, stream=True) as remote_zip_file:
         remote_zip.raise_for_status()
-        with open(filepath, 'wb') as local_zip_file:
+        with open(local_filepath, 'wb') as local_zip_file:
             for chunk in remote_zip.iter_content(chunk_size=remote_zip_buffer_size)
-                f.write(chunk)
+                chunk_iterations += 1
+                local_zip_file.write(chunk)
+    result = (
+              f'{download_link}' + '\n' \
+              f'Downloaded in: {chunk_iterations} chunks' + '\n'
+             )
+    return result
 
 # Start Here
 if not worker_start_range:
@@ -79,6 +85,7 @@ check_download_directory()
 
 for current_page in range(worker_start_range, worker_end_range):
     url, response = request_page(current_page)
+
     if response.status_code == http_success:
         html_title_start = response.text.find('<title>') + len('<title>')
         html_title_end = response.text.find('</title>')
@@ -90,8 +97,10 @@ for current_page in range(worker_start_range, worker_end_range):
         html_title_start = 0
         html_title_end = 0
         html_title = empty_html_title
-    print('{} {} {} {}'.format(url, html_title_start, html_title_end, html_title))
+
     if empty_html_title not in html_title:
-        download_zip(current_page, url, html_title)
-    database_insert_query = '''INSERT INTO catalog VALUE(NULL, {}, "{}", CURRENT_TIMESTAMP, 0)'''.format(current_page, html_title)
+        print(download_zip(current_page, url, html_title))
+
+    database_insert_query = f'''INSERT INTO catalog VALUES (NULL, {current_page}, "{html_title}", CURRENT_TIMESTAMP, 0)'''
+
     submit_database_result(database_insert_query)
