@@ -53,12 +53,12 @@ def request_page(page_id):
 def check_download_directory():
     import os
     if not os.path.exists(download_directory):
-    try:
-        os.makedirs(download_directory)
-    except OSError:
-        import sys
-        print('Download directory does not exist or is not valid. Exiting...')
-        sys.exit()
+        try:
+            os.makedirs(download_directory)
+        except OSError:
+            import sys
+            print('Download directory does not exist or is not valid. Exiting...')
+            sys.exit()
 
 def download_zip(current_page, url, html_title):
     # Pause for n seconds to avoid hammering Thingiverse
