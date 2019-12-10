@@ -67,7 +67,7 @@ def download_zip(current_page, url, html_title):
     with requests.get(url, stream=True) as remote_zip_file:
         remote_zip.raise_for_status()
         with open(filepath, 'wb') as local_zip_file:
-            for chunk in remote_zip.iter_content(chuck_size=8192)
+            for chunk in remote_zip.iter_content(chunk_size=8192)
                 f.write(chunk)
 
 # Start Here
