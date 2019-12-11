@@ -3,9 +3,13 @@
 Scans Thingiverse.com by page ID, captures page details and downloads Thingiverse project files locally.
 
 Dependencies:
-* MySQL or MariaDB
+* Python 3.6 or later
+* MySQL or MariaDB (mariadb-server mariadb-client)
 * MySQL Connector for Python (sudo apt-get install python3-mysql.connector)
 
-Ubuntu Installation (From scratch):
-sudo apt-get update && sudo apt-get upgrade -y && sudo apt-get install python3-mysql.connector mariadb-server mariadb-client
-mysql_secure_installation
+Steps:
+* Create preferred database username and password and add to script
+* Set runtime variables
+  * Worker start and end ranges
+  * Download directory
+  * Download buffer size (Currently set to 100MB)
