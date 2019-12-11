@@ -72,7 +72,7 @@ def download_zip(current_page, url, html_title):
                 chunk_iterations += 1
                 local_zip_file.write(chunk)
     result = (
-              f'{download_link}' + '\n' \
+              f'{url}' + '\n' \
               f'Downloaded in: {chunk_iterations} chunks' + '\n'
              )
     return result
