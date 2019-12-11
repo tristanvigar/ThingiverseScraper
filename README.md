@@ -1,5 +1,7 @@
 # ThingiverseScraper
 
+Disclaimer: This is a thought experiment and is for educational purposes. The author takes no responsibility for the misuse of these scripts as this disclaimer implies a "No Jerk" policy when automating websites visits.
+
 Scans Thingiverse.com by page ID, captures page details and downloads Thingiverse project files locally.
 
 Dependencies:
