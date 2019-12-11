@@ -66,9 +66,9 @@ def download_zip(current_page, url, html_title):
     local_filepath = f'{download_directory}{current_page}-{html_title}.zip'
     chunk_interations = 0
     with requests.get(url, stream=True) as remote_zip_file:
-        remote_zip.raise_for_status()
+        remote_zip_file.raise_for_status()
         with open(local_filepath, 'wb') as local_zip_file:
-            for chunk in remote_zip.iter_content(chunk_size=remote_zip_buffer_size):
+            for chunk in remote_zip_file.iter_content(chunk_size=remote_zip_buffer_size):
                 chunk_iterations += 1
                 local_zip_file.write(chunk)
     result = (
