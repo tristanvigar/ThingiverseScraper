@@ -9,6 +9,7 @@ Dependencies:
 
 Steps:
 * Create preferred database username and password and add to script
+* Load "thingiverse_catalog" into database
 * Set runtime variables
   * Worker start and end ranges
   * Download directory
