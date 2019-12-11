@@ -11,7 +11,7 @@ worker_end_range = 5000000
 empty_html_title = 'Empty_Page'
 download_directory = '/root/thingiverse_scrape/files/'
 sleep_timer_seconds = 4
-remote_zip_buffer_size = 100000000 #Size in bytes
+remote_zip_buffer_size = 102400000 # Buffer size in bytes (100MB)
 
 # Function definitions
 def create_database_connection():
