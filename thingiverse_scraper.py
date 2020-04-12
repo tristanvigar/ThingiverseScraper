@@ -10,6 +10,7 @@ worker_start_range = None
 worker_end_range = 5000000
 empty_html_title = 'Empty_Page'
 download_directory = '/root/thingiverse_scrape/files/'
+html_download_directory = '/root/thingiverse_scrape/html/'
 sleep_timer_seconds = 4
 remote_zip_buffer_size = 102400000 # Buffer size in bytes (100MB)
 
@@ -77,6 +78,10 @@ def download_zip(current_page, url, html_title):
              )
     return result
 
+def write_page_html(html_text):
+    with open(html_download_directory + str(current_page) + '.txt') as f_open_file:
+        f_open_file.write(html_text)
+
 # Start Here
 if not worker_start_range:
     worker_start_range = retrieve_index() + 1
@@ -85,6 +90,7 @@ check_download_directory()
 
 for current_page in range(worker_start_range, worker_end_range):
     url, response = request_page(current_page)
+    html_text = response.text
 
     if response.status_code == http_success:
         html_title_start = response.text.find('<title>') + len('<title>')
@@ -100,6 +106,8 @@ for current_page in range(worker_start_range, worker_end_range):
 
     if empty_html_title not in html_title:
         print(download_zip(current_page, url, html_title))
+
+    write_page_html(html_text)
 
     database_insert_query = f'''INSERT INTO thingiverse_catalog VALUES (NULL, {current_page}, "{html_title}", CURRENT_TIMESTAMP)'''
 
