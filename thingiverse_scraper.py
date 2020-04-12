@@ -79,7 +79,7 @@ def download_zip(current_page, url, html_title):
     return result
 
 def write_page_html(html_text):
-    with open(html_download_directory + str(current_page) + '.txt') as f_open_file:
+    with open(html_download_directory + str(current_page) + '.txt', 'w') as f_open_file:
         f_open_file.write(html_text)
 
 # Start Here
