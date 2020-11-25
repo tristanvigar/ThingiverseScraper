@@ -11,3 +11,6 @@ Steps:
 * Run setup_thingiverse_database.py to create database for storage
 * Define configuration variables at the top of thingiverse_scraper.py
 * Run thingiverse_scraper.py and get a coffee (This will take a real long time...)
+
+Structure:
+* Thingiverse_scraper will create two new directories within its directory 'files' and 'html' to capture Thingiverse Thing zip files and the Thing's HTML page source, respectively. This allows for the user to dig into the page source for items like 'tags' or other interesting information per thing.
