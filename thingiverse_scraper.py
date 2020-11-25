@@ -154,8 +154,6 @@ def download_thingiverse_zip_file(files_directory, thing_id, thing_page_title, t
 #
 # Start Here
 #
-
-
 files_directory, html_directory = get_download_file_paths()
 
 sqlite_database_path = get_sqlite_database_path()
