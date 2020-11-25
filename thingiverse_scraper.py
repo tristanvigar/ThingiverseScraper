@@ -172,7 +172,7 @@ if not thing_start_range:
 
 for current_page in range(thing_start_range, thing_end_range):
     thing_id = current_page
-    thing_timestamp = datetime.date.today().strftime('%Y/%m/%d %H:%M:%S')
+    thing_timestamp = datetime.datetime.now().strftime('%Y/%m/%d %H:%M:%S')
 
     thing_html, thing_page_title = check_if_valid_thingiverse_page_and_retrieve_html_and_page_title(thing_id, thingiverse_url, http_success_status_codes)
     if not thing_html and not thing_page_title:
@@ -187,10 +187,11 @@ for current_page in range(thing_start_range, thing_end_range):
     with open(html_directory + f'{thing_id}-{thing_page_title}.txt', 'w') as f_html_file:
         f_html_file.write(thing_html)
 
-    time.sleep(delay_between_downloads_seconds)
     # Download Thing zip file
     download_thingiverse_zip_file(files_directory, thing_id, thing_page_title, thingiverse_url, http_success_status_codes, remote_zip_buffer_size)
     insert_record_into_thingiverse_table(database_connection, database_cursor, thingiverse_table_name, None, thing_id, thing_page_title, thing_timestamp)
+
+    time.sleep(delay_between_downloads_seconds)
 
 close_database_cursor(database_cursor)
 close_database_connection(database_connection)
